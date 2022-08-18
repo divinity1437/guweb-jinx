@@ -1,0 +1,191 @@
+body {
+    background-image: url(../../images/backgrounds/bg3.png);
+}
+.col-lg-12 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.main-block {
+    background-color: white;
+    display: flex;
+    padding: 24px;
+    padding-bottom: 0;
+    justify-content: space-between;
+    border-radius: 4px;
+    margin-top: 12px;
+}
+.main-content {
+    width: 100%;
+}
+.gatari-devka {
+    margin-left: -38px;
+    width: 307px;
+    height: 397px;
+    background-image: url(../../images/characters/shinobu_colorful.png);
+    background-size: 100%;
+}
+.inputs-block {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    color: #222;
+    width: 72%;
+}
+.textarea-block--content {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+}
+.block-title--xl {
+    font-size: 24px;
+    font-weight: 700;
+}
+.block-title--sm {
+    font-size: 14px;
+    font-weight: 500;
+}
+.girl-block {
+    display: flex;
+    align-items: flex-end;
+    width: 30%;
+    align-self: flex-end;
+}
+.registration-input-default {
+    border: none;
+    font-size: 13px;
+    color: #222;
+    background-color: #eee;
+    width: 100%;
+    padding: 8px 14px;
+    border-radius: 8px;
+    margin-top: 12px;
+    transition: 0.2s border-color, 0.2s color;
+}
+
+.registration-input-default:focus {
+    border-color: #b9b9b9;
+    outline: none;
+}
+.registration-button {
+    width: 100%;
+    padding-top: 2px;
+    box-shadow: 0 5px #8a2344;
+}
+.registration-button:not(.disabled):active {
+    margin-top: 16px;
+    background-color: #d82f68;
+}
+
+.links-block {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+}
+.links-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+iframe.video {
+    border: 2px solid #d1d1d1;
+    border-radius: 4px;
+    width: 100%;
+}
+.registration-link-btn {
+    font-size: 13px;
+    font-weight: 600;
+    padding-top: 6px;
+    padding-bottom: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    width: 49.7%;
+    margin-bottom: 10px;
+    transition: 0.2s background-color, 0.2s color, 0.2s border-color, 0.2s box-shadow;
+    color: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background-image: url(https://osu.gatari.pw/static/images/icons/button.svg);
+    background-color: #ec5700;
+    background-size: 150%;
+    box-shadow: 0 5px #9c3a00;
+}
+
+.registration-link-btn.discord{
+    background-color: #7289DA;
+    box-shadow: 0 5px #5a6eb3;
+}    
+
+.registration-link-btn.vk{
+    background-color: #4a76a8;
+    box-shadow: 0 5px #365980;
+}    
+
+.registration-link-btn.youtube{
+    background-color: #a90f0f;
+    box-shadow: 0 5px #800029;
+}    
+
+.registration-link-btn .fab {
+    font-weight: normal;
+}
+
+.registration-link-btn:hover {
+    background-color: #ab2f5a;
+    color: white;
+    border-color: #de5a87;
+    box-shadow: 0 5px #8a2344;
+}
+.link-icon {
+    margin-bottom: 1px;
+}
+
+.inputs-block--content{
+    width: 95%;
+    text-align: center;
+}
+
+@media (max-width: 992px) {
+    .main-block {
+        flex-direction: column;
+        height: auto;
+        padding-top: 18px;
+        margin-top: 0px;
+    }
+    .girl-block {
+        display: none;
+    }
+    .inputs-block {
+        width: auto;
+    }
+    .block-title--xl{
+        font-size: 26px;
+    }
+    .registration-input-default {
+        font-size: 13.5px;
+        width: 100%;
+    }
+    .links-block {
+        padding: 8px;
+    }
+    .inputs-block--content{
+        width: 100%;
+    }
+}
+
+
+.alert {
+    margin: 12px 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    padding: 0.45rem 0.85rem;
+}
+
+a.key-hint {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 4px 0;
+    text-decoration: underline;
+}

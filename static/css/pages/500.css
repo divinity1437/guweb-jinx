@@ -1,0 +1,115 @@
+body {
+    background-image: url(/static/images/backgrounds/bg3.png)
+}
+
+.error-block {
+    border-radius: 4px;
+    background-color: #202020;
+    padding: 38px;
+    color: #fff;
+    display: flex;
+    height: 270px;
+    background-image: url(/static/images/backgrounds/banner_background.jpg);
+    text-shadow: -1px 2px 2px rgba(0, 0, 0, .33);
+    box-shadow: -1px 2px 2px 1px rgba(0, 0, 0, .11)
+}
+
+.block-content {
+    z-index: 1;
+    align-items: self-end;
+    display: flex;
+    flex-direction: column;
+    z-index: 2
+}
+
+@media(max-width:992px) {
+    .gatari-devka {
+        filter: brightness(.6)
+    }
+}
+
+.block-content .title {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.1
+}
+
+.block-content .subtitle {
+    font-size: 15px;
+    margin-top: 22px;
+    margin-bottom: 24px
+}
+
+.backlink {
+    color: #fc2!important;
+    text-decoration: none!important;
+    border-bottom: solid 2px transparent;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    transition: .3s border-bottom;
+    cursor: pointer
+}
+
+.backlink:hover {
+    border-bottom: solid 2px #fc2
+}
+
+.gatari-devka {
+    width: 438px;
+    height: 270px;
+    background-image: url(/static/images/characters/nadeko.png);
+    background-size: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1
+}
+
+@media(max-width:768px) {
+    .error-block {
+        height: auto
+    }
+    .gatari-devka {
+        bottom: 0;
+        opacity: .3;
+        top: auto
+    }
+}
+
+@media(max-width:576px) {
+    .gatari-devka {
+        display: none
+    }
+}
+
+.gatari-devka.beatmap {
+    background-image: url(/static/images/characters/senjougahara.png)
+}
+
+.gatari-devka.user {
+    background-image: url(/static/images/characters/shinobu.png)
+}
+
+.gatari-devka.userrestricted {
+    background-image: url(/static/images/characters/shinobuban.png)
+}
+
+.gatari-devka.clan {
+    background-image: url(/static/images/characters/mayoi.png)
+}
+
+.gatari-devka.match {
+    background-image: url(/static/images/characters/hanekawa.png)
+}
+
+.gatari-devka.access {
+    background-image: url(/static/images/characters/senjougahara403.png)
+}
+
+.gatari-devka.server {
+    background-image: url(/static/images/characters/nadeko.png)
+}
+
+#snow-container {
+    height: 100%
+}

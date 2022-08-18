@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap/datepicker.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="enot" content="7341609700643toqXQYeoDjGcuNiWAdzM-z3f1zoCxFuu" />
+    <meta name="keywords" content="home, page, osu, osu private server, osu server, gatari, osu!, private, server, osu приватный сервер, приватный сервер, гатари, ripple, akatsuki, osugatari">
+    <meta name="description" content="osu!gatari is the best private osu! server. On the website you will find all the information regarding the osu!gatari server: players leaderboard, maps list, how to start playing and much more.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#cc5288">
+    <meta charset="utf-8">
+    <meta name="twitter:card" content="summary">
+    <meta property="og:type" content="website">
+    <meta name="twitter:site" content="@osugatari">
+    <meta property="vk:image" content="/static/favicons/apple-touch-icon.png" />
+    <meta property="twitter:image" content="/static/favicons/apple-touch-icon.png" />
+    <meta property="og:image" content="https://osu.gatari.pw/static/favicons/apple-touch-icon.png" />
+    <script src="/static/js/jquery/jquery.min.js"></script>
+    <script> var lang = "en";</script>
+    <script src="/static/js/jquery/i18nextXHRBackend.min.js"></script>
+    <script src="/static/js/jquery/i18next.min.js"></script>
+    <script src="/static/js/i18n.js"></script>
+    <script src="/static/js/jquery/jquery.pjax.js"></script>
+    <script src="/static/js/jquery/twemoji.min.js"></script>
+    <script src="/static/js/bootstrap/popper.min.js"></script>
+    <script src="/static/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap/bootstrap-select.min.js"></script>
+    <script src="/static/js/bootstrap/bootstrap-datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.0.0/nouislider.min.js?1535643751702396253"></script>
+    <script src="/static/js/socket_module.js"></script>
+    <script src="/static/js/pace.min.js"></script>
+    
+    <script src="/static/js/vue_modules/vue.min.js"></script>
+    <script src="/static/js/vue_modules/vue-axios-plugin.min.js"></script>
+    <script src="/static/js/vue_modules/vue-timeago.min.js"></script>
+    <script src="/static/js/vue/storage.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/static/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/static/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="shortcut icon" href="/static/favicons/favicon.ico">
+    <link href="/static/css/exo2.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script>
+                    var API = ""
+                    var myUserId = null;
+                    var badge = null;
+                    var token = null;
+                 
+                $(function () {
+                    //$(document).pjax("a[target!='_blank'][href!='#'][href]", '#content');
+                    // Todo: find out wheres issue
+
+
+                    setTimeout(function(){
+                        $('[data-toggle="tooltip"]').tooltip();
+                        $('.selectpicker:not(.bs-select-hidden)').selectpicker();
+                        $("[data-toggle=popover]").popover();
+                    }, 200);
+                    if (typeof twemoji !== "undefined") {
+                        $(".twemoji").each(function(k, v) { twemoji.parse(v); });
+                    }
+                });
+            </script>
+    </head>
+
+    {% block header %}
+
+    {% include 'header.html' %}
+
+    <!--div class="restricted-banner">
+        <div class="alert-text">
+         <i class="fas fa-exclamation-triangle rest-icon"></i>
+        </div>
+         
+        <div class="alert-text2"> Your account is <span class="text-yellow"> restricted </span></div>
+        <div class="alert-text3">
+            While restricted, you will be unable to interact with other players and your scores will only be visible to you.<br><b> You can contact support here: <a href="https://vk.com/im?sel=-139469474">https://vk.com/im?sel=-139469474</a>.
+         <br>How to appeal: <a href="/docs/appeal">https://osu.gatari.pw/docs/appeal</a></b>
+         </b>
+         <span id="unban-hint">
+             <br>
+                 <b>Alternatively, you can purchase an instant unban (and wipe) by clicking the button below.  </b>
+             </span>
+         </div> 
+        <a class="alert-unban" href="https://www.free-kassa.ru/merchant/cash.php?oa=500&o=unban - MoonL1ght&us_desc=unBAN&s=10ee759410ed306b2f92ac3858359aae&m=55473">Purchase unban now!(8$)</a>
+     </div-->
+    
+    {% block content %}
+    {% endblock %}
+
+
+    
+    
+    {% include 'footer.html' %}
+   
+    
+    {% if request.cookies.get("ds") == "1" %}
+    <link rel="stylesheet" href="/static/css/darkness.css">
+    <style>body{
+        --base: 250;
+        --base-deg: 285.0deg;
+    }</style>
+
+    {% endif %}
+
+    <link rel="stylesheet" href="/static/css/snow.css?62325">
+    <script src="https://osu.gatari.pw/static/js/vue/header.js?62325"></script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"735106a0baf4b374","version":"2022.6.0","r":1,"token":"2324d482597d415dbb76c32090bf8128","si":100}' crossorigin="anonymous"></script>
+</body>
+</html>       
+    {% endblock %}
+    

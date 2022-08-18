@@ -1,0 +1,146 @@
+<div class="footer-bg">
+    <div class="container">
+       <div class="footer">
+          <div class="footer-info-rows">
+             <div class="footer-info-block">
+                <span class="footer-title">Help</span>
+                <ul>
+                   <li><a href='/docs/faq'>FAQ</a></li>
+                   <li><a href='/docs/rules'>Rules</a></li>
+                   <li><a href='/docs/connect'>How to connect</a></li>
+                </ul>
+             </div>
+             <div class="footer-info-block">
+                <span class="footer-title">Socials</span>
+                <ul>
+                   <li><a href='https://discord.gg/ZURP4Mx4Vc' target="_blank">Discord</a></li>
+                   <li><a href='https://twitter.com/osugatari' target="_blank">Twitter</a></li>
+                   <li><a href='https://vk.com/osu.gatari' target="_blank">VK group</a></li>
+                </ul>
+             </div>
+             <div class="footer-info-block">
+                <span class="footer-title">Dev</span>
+                <ul>
+                   <li><a href='https://p.datadoghq.com/sb/b9ca40a05-52c240bede' target="_blank">Status</a></li>
+                   <li><a href='/team'>Team</a></li>
+                   <li><a href='https://github.com/xxdstem?tab=repositories' target="_blank">Source code</a></li>
+                </ul>
+             </div>
+          </div>
+          <div class="logo-menu">
+             <div class="footer-logo">
+                <span>osu!gatari</span>
+                <a class="logo-subtitle"> best private osu! server</a>
+             </div>
+             <div class="d-flex justify-content-center">
+                {% if request.cookies.get("ds") == "1" %}
+                <a data-toggle="popover" data-placement="top" data-content="Switch to light theme" data-trigger="hover" data-original-title="" href="#" @click.prevent="goBackDarkSite(0)" class="ds-switch">
+                    
+                <i class="fas fa-sun"></i>
+                </a>
+                {% endif %}
+
+                {% if request.cookies.get("ds") == "0" %}
+                <a data-toggle="popover" data-placement="top" data-content="Switch to dark theme" data-trigger="hover" data-original-title="" href="#" @click.prevent="goBackDarkSite(1)" class="ds-switch">
+                    
+                <i class="fas fa-moon"></i>
+                </a>
+                {% endif %}
+
+                <div class="dropup dropup-language dropup-block">
+                   <div class="language">
+                      Language
+                      <img src="/static/images/flags/GB.png" class="dropup-flags">
+                   </div>
+                   <div class="dropup-content">
+                      <div @click="lang = 'en'" class="language-select selected">
+                         <span class="language-text">English</span>
+                         <img src="/static/images/flags/GB.png" class="dropup-flags">
+                      </div>
+                      <div @click="lang = 'ru'" class="language-select">
+                         <span class="language-text">Русский</span>
+                         <img src="/static/images/flags/RU.png" class="dropup-flags">
+                      </div>
+                      <div @click="lang = 'pl'" class="language-select">
+                         <span class="language-text">Polski</span>
+                         <img src="/static/images/flags/PL.png" class="dropup-flags">
+                      </div>
+                      <div @click="lang = 'fr'" class="language-select">
+                         <span class="language-text">Français</span>
+                         <img src="/static/images/flags/FR.png" class="dropup-flags">
+                      </div>
+                      <div @click="lang = 'ko'" class="language-select">
+                         <span class="language-text">한국어</span>
+                         <img src="/static/images/flags/KR.png" class="dropup-flags">
+                      </div>
+                      <div @click="lang = 'pt'" class="language-select">
+                         <span class="language-text">Português</span>
+                         <img src="/static/images/flags/BR.png" class="dropup-flags">
+                      </div>
+                      <div @click="lang = 'fi'" class="language-select">
+                         <span class="language-text">Suomi</span>
+                         <img src="/static/images/flags/FI.png" class="dropup-flags">
+                      </div>
+                      <div @click="lang = 'de'" class="language-select">
+                         <span class="language-text">Deutsch</span>
+                         <img src="/static/images/flags/DE.png" class="dropup-flags">
+                      </div>
+                      <div @click="lang = 'es'" class="language-select">
+                         <span class="language-text">Español</span>
+                         <img src="/static/images/flags/ES.png" class="dropup-flags">
+                      </div>
+                      <div @click="lang = 'nl'" class="language-select">
+                         <span class="language-text">Nederlands</span>
+                         <img src="/static/images/flags/NL.png" class="dropup-flags">
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+    ym(51885203, "init", {
+         clickmap:true,
+         trackLinks:true,
+         accurateTrackBounce:true
+    });
+ </script>
+ <noscript>
+    <div><img src="https://mc.yandex.ru/watch/51885203" style="position:absolute; left:-9999px;" alt="" /></div>
+ </noscript>
+ <script>
+    new Vue({
+        name: 'FooterBlock',
+        el: '.footer-bg',
+        data() {
+            return {
+                lang: "{'country': 'gb', 'code': 'en'}"
+            }
+        },
+        watch: {
+            lang(lang) {
+                document.cookie = "language=" + lang + ";path=/;max-age=31536000";
+                window.location.reload();
+            }
+        },
+        
+        methods:{
+            goBackDarkSite(go){
+                if(go==true){
+                    document.cookie = "ds=1;path=/;max-age=31536000";
+                }
+                else{
+                    document.cookie = "ds=0;path=/;max-age=31536000";
+                }
+                window.location.reload();
+            }
+        }
+    });
+ </script>
+ </div>

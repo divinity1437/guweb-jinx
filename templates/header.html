@@ -1,0 +1,200 @@
+<div id="app">
+    <div id="header">
+       <div class="header-bg" :class="{'minimized' : minimize}">
+          <div class="container">
+             <div class="row navbar">
+                <div class="header-navbar-left">
+                   <a href="/home" class="logo-all">
+                      <div class="logo-fill"></div>
+                      <div class="logo"></div>
+                   </a>
+                   <div class="navbar-left-hidden">
+                      <a href="/leaderboard/osu/pp" class="nav-item nav-link router-link "> leaderboard</a>
+                      <div class="nav-select dropdown">
+                         <a href="/beatmaps" class="nav-item nav-link router-link ">
+                         beatmaps
+                         </a>
+                      </div>
+                      <div class="nav-select dropdown">
+                         <a class="nav-item nav-link router-link " id="helpdropdown" data-toggle="dropdown" aria-expanded="false">
+                         community
+                         </a>
+                         <div class="leaderboard-dropdown" aria-labelledby="helpdropdown">
+                            <a href='/community/livestreams' class="drop-single">
+                            <span class="drop-text"> livestreams </span>
+                            </a>
+                            <a href='/community/clans' class="drop-single">
+                            <span class="drop-text"> clans </span>
+                            </a>
+                            <a href='/community/matches' class="drop-single">
+                            <span class="drop-text"> matches </span>
+                            </a>
+                            <a href='/community/plays' class="drop-single">
+                            <span class="drop-text"> top plays </span>
+                            </a>
+                         </div>
+                      </div>
+                      <div class="nav-select dropdown">
+                         <a class="nav-item nav-link router-link " id="helpdropdown" data-toggle="dropdown" aria-expanded="false">
+                         help
+                         </a>
+                         <div class="leaderboard-dropdown" aria-labelledby="helpdropdown">
+                            <a class="drop-single" href="/about">
+                            <span class="drop-text"> about </span>
+                            </a>
+                            <a class="drop-single" href="/docs/rules">
+                            <span class="drop-text"> rules </span>
+                            </a>
+                            <a class="drop-single" href="/docs/faq">
+                            <span class="drop-text"> FAQ </span>
+                            </a>
+                            <a class="drop-single" href="/docs">
+                            <span class="drop-text"> documentation </span>
+                            </a>
+                            <hr>
+                            <a class="drop-single" target="_blank" href="https://storage.osu.gatari.pw/switcher.zip">
+                            <span class="drop-text"> server switcher </span>
+                            </a>
+                            <a class="drop-single" target="_blank" href="https://discord.gg/ZURP4Mx4Vc">
+                            <span class="drop-text"> chat (Discord) </span>
+                            </a>
+                            <a class="drop-single" target="_blank" href="https://vk.com/im?sel=-139469474">
+                            <span class="drop-text"> contact support </span>
+                            </a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="header-menu">
+                   <nav class="navbar navbar-expand-lg navbar-light">
+                      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                         <div class="navbar-nav">
+                            <a href="/support" class="header-button druzban-button router-link " data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Support us!"><i class="fas fa-heart"></i></a>
+                            <div class="search-block">
+                               <input type="text" id="query" v-model.trim="query" @keyup.enter="redirect()" class="main-search" autocomplete="off" placeholder="">
+                               <div style="display: none;" class="main-search--result" v-show="query != ''">
+                                  <div class="main-search--header">
+                                     <% results == null ? 'No results found' : 'Results' %>
+                                  </div>
+                                  <a :href="'/u/'+user.id" v-for="user in results" :class="'search-sinlge-user'+((user.privileges & 1) == 0 ? ' restricted' : '')+(user.is_online ? '' : ' offline')" :style="'background-image: url(https://a.osu.gatari.pw/'+user.id">
+                                     <div class="search-user-avatar" :style="'background-image: url(https://a.osu.gatari.pw/'+user.id"></div>
+                                     <div class="search-user-content">
+                                        <span class="search-user-nickname">
+                                        <% user.username %>
+                                        </span>
+                                        <div class="user-content">
+                                           <div class="search-user-flag">
+                                              <img :src="'https://osu.gatari.pw/static/images/flags/'+user.country+'.png'" class="search-user-flag">
+                                           </div>
+                                        </div>
+                                     </div>
+                                  </a>
+                               </div>
+                            </div>
+                            <div>
+                               <a @click.prevent="showLogin()" href="#" class="header-avatar"></a>
+                            </div>
+                         </div>
+                      </div>
+                   </nav>
+                </div>
+                <div class="mobile-user">
+                   <a @click="showLogin()" class="header-avatar" :class="{'hidden': mobHeader}" href="#"></a>
+                   <input v-model="mobHeader" id="collapse-btn" type="checkbox">
+                   <label for="collapse-btn" class="collapse-button"> <i class="fas fa-bars"></i> </label>
+                </div>
+             </div>
+             <div class="container flex-dropdown">
+                <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+                   <div v-show="login.form" style="display: none;" @click="login.user = {}" class="dropdown-login-bg" :class="{'error': !login.user && login.error, 'add-bottom-rad': login.login != '' || login.password != ''}">
+                      <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+                         <div v-show="!login.user && login.error" class="login-error">
+                            <% login.error %>
+                         </div>
+                      </transition>
+                      <div class="dropdown-login-content">
+                         <div class="dropdown-login-stroke"> Sign In To Proceed </div>
+                         <form>
+                            <input @keyup.enter="auth()" autocomplete="off" v-model="login.login" type="text" class="login-form" placeholder="username">
+                            <input @keyup.enter="auth()" autocomplete="off" v-model="login.password" type="password" class="login-form login-form-password" placeholder="password">
+                         </form>
+                         <a @click="showLogin()" class="login-forgot" href="/recover"> Recover my password </a>
+                         <button @click="auth()" :class="'login-btn'+(login.login == '' || login.password == '' || (!login.user && login.error) ? ' disabled' : '')">
+                         Sign in <i class="fas fa-sign-in-alt login-icon"></i>
+                         </button>
+                      </div>
+                      <transition enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
+                         <div v-show="login.login == '' && login.password == ''" class="login-registrate">
+                            <div class="dropdown-login-content">
+                               <div class="login-registrate-stroke1">
+                                  Don't have an account?
+                               </div>
+                               <div class="login-registrate-stroke2">
+                                  Feel free to sign up to our server!
+                               </div>
+                               <a @click="showLogin()" href="/user/register" class="registrate-login-block-btn">
+                               Register <i class="fa fa-key login-icon"></i>
+                               </a>
+                            </div>
+                         </div>
+                      </transition>
+                   </div>
+                </transition>
+             </div>
+          </div>
+       </div>
+       <transition enter-active-class="animated slideInDown" leave-active-class="animated slideOutUp">
+          <div v-show="mobHeader" style="display: none;" class="mobile-header">
+             <div class="mobile-header--head">
+                <a @click="showLogin()" href="#" class="mobile-header--user">
+                   <div class="mobile-header--avatar"></div>
+                   <div class="mobile-header--username">
+                      Guest
+                   </div>
+                </a>
+             </div>
+             <div class="mobile-search">
+                <input v-model="query" placeholder="Search for users.." class="search-input"><span class="search-lens fa fa-search"></span>
+                <div class="search-results" style="display: none;" v-show="query != ''">
+                   <a v-for="user in results" :href="'/u/'+user.id" class="result-user" @click="mobHeader = false">
+                      <div class="user-avatar" :style="'background-image: url(https://a.osu.gatari.pw/'+user.id+');'">
+                         <div class="user-status" :class="{'online': user.is_online == 1}"></div>
+                      </div>
+                      <div>
+                         <span class="user-flag donor-flag" :style="'background-image: url(/static/images/flags/'+user.country+'.png);'"> </span>
+                         <% user.username %>
+                      </div>
+                   </a>
+                </div>
+             </div>
+             <div class="mobile-header--content">
+                <a href="/leaderboard/osu/pp" @click="mobHeader = false" class="mobile-header--single">
+                <span class="header-block--title">leaderboard </span>
+                </a>
+                <a href="/beatmaps" @click="mobHeader = false" class="mobile-header--single">
+                <span class="header-block--title">beatmaps </span>
+                </a>
+                <div href="#" @click="expand" class="mobile-header--single">
+                   <span class="header-block--title">community </span>
+                   <div class="sub-menu hidden">
+                      <a @click="mobHeader = false" href="/community/livestreams" class="sub-menu-block">
+                      <i class="fas fa-angle-right"></i> livestreams
+                      </a>
+                      <a @click="mobHeader = false" href="/community/clans" class="sub-menu-block">
+                      <i class="fas fa-angle-right"></i> clans
+                      </a>
+                      <a @click="mobHeader = false" href="/community/matches" class="sub-menu-block">
+                      <i class="fas fa-angle-right"></i> matches
+                      </a>
+                      <a @click="mobHeader = false" href="/community/plays" class="sub-menu-block">
+                      <i class="fas fa-angle-right"></i> top plays
+                      </a>
+                   </div>
+                </div>
+                <a href="/support" @click="mobHeader = false" class="mobile-header--single">
+                <span class="header-block--title">support </span>
+                </a>
+             </div>
+          </div>
+       </transition>
+    </div>

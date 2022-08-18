@@ -1,0 +1,110 @@
+
+    {% extends 'base.html' %}
+    {% block content %}
+<div id="content">
+    <script>
+        var mode = {{ mode }};
+        var sort = "pp";  
+        var page = 1;
+        var country = "";
+    </script>
+    <div id="leaderboard" style="display: none !important;">
+    <title> leaderboard | gatari </title>
+    <link onload='onLoad()' rel="stylesheet" href="/static/css/pages/leaderboard.css?62325">
+    <div class="container">
+    <div class="col-lg-12">
+    <div class="main-selector">
+    <a :href="'/leaderboard/osu/'+(lbType == 'score' ? 'score' : 'pp')" class="mode-select" :class="{'--selected': mode == 0}" @click="LoadLeaderboard(lbType == 'score' ? 'score' : 'pp', 0, 1, country)"> osu!</a>
+    <a :href="'/leaderboard/taiko/'+(lbType == 'score' ? 'score' : 'pp')" class="mode-select" :class="{'--selected': mode == 1}" @click="LoadLeaderboard(lbType == 'score' ? 'score' : 'pp', 1, 1, country)"> osu!taiko</a>
+    <a :href="'/leaderboard/ctb/'+(lbType == 'score' ? 'score' : 'pp')" class="mode-select" :class="{'--selected': mode == 2}" @click="LoadLeaderboard(lbType == 'score' ? 'score' : 'pp', 2, 1, country)"> osu!catch</a>
+    <a :href="'/leaderboard/mania/'+(lbType == 'score' ? 'score' : 'pp')" class="mode-select" :class="{'--selected': mode == 3}" @click="LoadLeaderboard(lbType == 'score' ? 'score' : 'pp', 3, 1, country)"> osu!mania </a>
+    </div>
+    <div class="leaderboard-banner main-banner">
+    <div class="banner-text">
+    <div v-if="country != ''" class="player-flag leaderboard-flag" :style="'background-image: url(/static/images/flags/'+country+'.png)'" @click="LoadLeaderboard(lbType, mode, 1, '')">
+    <i class="back fa fa-times"></i>
+    </div>
+    Leaderboard
+    </div>
+    <div class="selector">
+    <a :href="'/leaderboard/'+modeText+'/pp'" @click.prevent="LoadLeaderboard('pp', mode, 1, '')" class="simple-banner-swtich" :class="{'--selected': lbType == 'pp'}">Performance Points</a>
+    <a :href="'/leaderboard/'+modeText+'/score'" @click.prevent="LoadLeaderboard('score', mode, 1, '')" class="simple-banner-swtich" :class="{'--selected': lbType == 'score'}">Score</a>
+    <a v-if="mode == 0" :href="'/leaderboard/osu/rx'" @click.prevent="LoadLeaderboard('rx', mode, 1, '')" class="simple-banner-swtich" :class="{'--selected': lbType == 'rx'}">Relax</a>
+    <a v-if="mode == 0" :href="'/leaderboard/osu/ap'" @click.prevent="LoadLeaderboard('ap', mode, 1, '')" class="simple-banner-swtich" :class="{'--selected': lbType == 'ap'}">Autopilot</a>
+    <a v-if="mode == 3" :href="'/leaderboard/mania/4k'" @click.prevent="LoadLeaderboard('4k', mode, 1, '')" class="simple-banner-swtich" :class="{'--selected': lbType == '4k'}">4K</a>
+    <a v-if="mode == 3" :href="'/leaderboard/mania/7k'" @click.prevent="LoadLeaderboard('7k', mode, 1, '')" class="simple-banner-swtich" :class="{'--selected': lbType == '7k'}">7K</a>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-12">
+    <div class="main-block">
+    <div class="leaderboard-main-bg table-responsive">
+    <div class="paginator" v-if="leaderboard.length == 50 || page > 1">
+    <a v-if="page == 1" class="paginator-btn disabled"><i class="fas fa-angle-left paginator-icon"></i><span class="hidden-xs">&nbsp;PREV</span></a>
+    <a v-else @click="LoadLeaderboard(lbType,mode,page-1)" :href="'/leaderboard/'+modeText+'/'+ lbType +'/'+(page-1)" class="paginator-btn"><i class="fas fa-angle-left paginator-icon"></i><span class="hidden-xs">&nbsp;PREV</span></a>
+    </a>
+    <a v-for="(item, index) in prevPagesArray" :key="index" v-if="index < page && index > page-4 && index > 0" @click="LoadLeaderboard(lbType,mode, index)" :href="'/leaderboard/'+modeText+'/'+ lbType +'/'+index" class="paginator-page">
+    <% index %>
+    </a>
+    <a v-for="(item, index) in nextPagesArray" :key="index" v-if="leaderboard.length == 50 && index > page-1" @click="LoadLeaderboard(lbType,mode, index)" :href="'/leaderboard/'+modeText+'/'+ lbType +'/'+index" :class="'paginator-page'+(page == index ? ' --selected':'')">
+    <% index %>
+    </a>
+    <a v-if="page == 200" class="paginator-btn disabled"><span class="hidden-xs">NEXT&nbsp;</span><i class="fas fa-angle-right paginator-icon"></i></a>
+    <a v-else @click="LoadLeaderboard(lbType,mode,page+1)" :href="'/leaderboard/'+modeText+'/'+ lbType +'/'+(page+1)" class="paginator-btn"><span class="hidden-xs">NEXT&nbsp;</span><i class="fas fa-angle-right paginator-icon"></i></a>
+    </div>
+    <table :class="'leaderboard-table table-responsive' +(load ? ' load' : '')">
+    <thead>
+    <tr>
+    <th class="ranking-page-table__heading"> </th>
+    <th class="ranking-page-table__heading ranking-page-table__heading--main"></th>
+    <th class="ranking-page-table__heading table__heading--selected"> <% (lbType == "score" ? "SCORE" : "PP") %> </th>
+    <th class="ranking-page-table__heading"> Accuracy </th>
+    <th class="ranking-page-table__heading"> Playcount </th>
+    <th class="ranking-page-table__heading"> Level </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="(user, index) in leaderboard" class="leaderboard-column" :class="{'inactive' : !user.active }">
+    <td class="ranking-page-table__column leaderboard-column-player-rank">#<% index +(page - 1) * 50+1 %> </td>
+    <td class="ranking-page-table__column leaderboard-column-player-name">
+    <a :title="flags[user.country]" :style="'background-image: url(/static/images/flags/'+user.country+'.png)'" :href="'/leaderboard/'+modeText+'/'+lbType+'?country='+user.country" @click="LoadLeaderboard(lbType,mode,1, user.country)" class="player-flag">
+    <div class="flag-dropdown">
+    <% flags[user.country] %>
+    </div>
+    </a>
+    <a :href="'/u/'+user.user+(specialLink(lbType)) +'?m='+mode"><% user.clan == null ? '' : '['+user.clan.abbr+'] ' %><% user.username %></a>
+    </td>
+    <td class="ranking-page-table__column leaderboard-column-pp"><% (lbType == 'score' ? scoreFormat(user.ranked_score) : addCommas(user.pp)+'pp') %> </td>
+    <td class="ranking-page-table__column ranking-page-table__column--dimmed"><% user.accuracy.toFixed(2) %>% </td>
+    <td class="ranking-page-table__column ranking-page-table__column--dimmed"><% addCommas(user.playcount) %> </td>
+    <td class="ranking-page-table__column ranking-page-table__column--dimmed"><% user.level %> </td>
+    </tr>
+    </tbody>
+    </table>
+    <div class="paginator" v-if="leaderboard.length == 50 || page > 1">
+    <a v-if="page == 1" class="paginator-btn disabled"><i class="fas fa-angle-left paginator-icon"></i><span class="hidden-xs">&nbsp;PREV</span></a>
+    <a v-else @click="LoadLeaderboard(lbType,mode,page-1)" :href="'/leaderboard/'+modeText+'/'+ lbType +'/'+(page-1)" class="paginator-btn"><i class="fas fa-angle-left paginator-icon"></i><span class="hidden-xs">&nbsp;PREV</span></a>
+    </a>
+    <a v-for="(item, index) in prevPagesArray" :key="index" v-if="index < page && index > page-4 && index > 0" @click="LoadLeaderboard(lbType,mode, index)" :href="'/leaderboard/'+modeText+'/'+ lbType +'/'+index" class="paginator-page">
+    <% index %>
+    </a>
+    <a v-for="(item, index) in nextPagesArray" :key="index" v-if="leaderboard.length == 50 && index > page-1" @click="LoadLeaderboard(lbType,mode, index)" :href="'/leaderboard/'+modeText+'/'+ lbType +'/'+index" :class="'paginator-page'+(page == index ? ' --selected':'')">
+    <% index %>
+    </a>
+    <a v-if="page == 200" class="paginator-btn disabled"><span class="hidden-xs">NEXT&nbsp;</span><i class="fas fa-angle-right paginator-icon"></i></a>
+    <a v-else @click="LoadLeaderboard(lbType,mode,page+1)" :href="'/leaderboard/'+modeText+'/'+ lbType +'/'+(page+1)" class="paginator-btn"><span class="hidden-xs">NEXT&nbsp;</span><i class="fas fa-angle-right paginator-icon"></i></a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script src="/static/js/vue/mixins/flags.js?62325"></script>
+    <script src="/static/js/vue/pages/leaderboard.js?62325"></script>
+    <style>body{
+            --base: 205;
+            --base-deg: 236.0deg;
+        }</style>
+    <meta name="theme-color" content="#408abf">
+    </div>
+    {% endblock %}

@@ -1,0 +1,3 @@
+var langWhitelist=["en","ru"];i18next.use(i18nextXHRBackend).init({nsSeparator:false,keySeparator:false,fallbackLng:false,lng:lang,whitelist:langWhitelist,load:"currentOnly",backend:{loadPath:"/static/locale/en.json"}});/*{{lng}}.json*/ var i18nLoaded=$.inArray(lang,langWhitelist)===-1;i18next.on("loaded",function(){i18nLoaded=true});function T(s,settings){if(typeof settings!=="undefined"&&typeof settings.count!=="undefined"&&$.inArray(lang,langWhitelist)===-1&&settings.count!==1)
+s=keyPlurals[s];return i18next.t(s,settings);}
+function urldecode(str){return decodeURIComponent((escape(unescape(str))+'').replace(/\+/g,'%20'));}

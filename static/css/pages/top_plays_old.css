@@ -1,0 +1,182 @@
+
+.tp-banner {
+    background-image: url(/web/20201120175007im_/https://osu.gatari.pw/static/images/banners/topplays-bg.jpg);
+    height: 222px;
+    background-size: cover;
+    background-position-y: 50%;
+    box-shadow: -1px 2px 2px 1px rgba(0, 0, 0, 0.11);
+}
+.banner.placeholder{
+    border-radius: 4px 0;
+    margin-top: 42px;
+    height: 180px;
+}
+
+.main-selector{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.main-banner:before {
+    top: 42px;
+    height: 180px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+.banner-text {
+    margin-top: 0px;
+}
+.main-block {
+    background-color: white;
+    display: grid;
+    padding: 24px;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    row-gap: 1em;
+    column-gap: 1em;
+    box-shadow: -1px 2px 2px 1px rgba(0, 0, 0, 0.11);
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.single-play-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    transition: 200ms box-shadow;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.single-play-block:hover {
+    -webkit-box-shadow:0 10px 20px rgba(0,0,0,.25);
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
+}
+.play-map-preview {
+    height: 120px;
+    width: 100%;
+    background-size: cover;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    background-position: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    flex-direction: column;
+    position: relative;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+.play-map-preview:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: rgba(0,0,0,.4);
+}
+.map-rank {
+    position: relative;
+    line-height: 1;
+}
+.play-map-name {
+    font-size: 15px;
+    color: white;
+    position: relative;
+    font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.player-pp-info {
+    display: flex;
+    justify-content: space-between;
+    color: #444;
+    align-items: baseline;
+    padding: 12px;
+}
+.player-name {
+    font-size: 16px;
+    font-weight: 600;
+}
+.play-pp {
+    font-size: 16px;
+    font-weight: 700;
+}
+.br-line {
+    margin-left: 12px;
+    margin-right: 12px;
+    background-color: #efefef;
+    height: 1px;
+}
+.play-main-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+}
+.info-single {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+.info-topic {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #999;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+.info-content {
+    color: #555;
+    font-size: 12px;
+    font-weight: 500;
+}
+@media (max-width: 992px) {
+    .main-block {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .main-block {
+        grid-template-columns: 1fr;
+    }
+}
+
+.single-play-block:hover {
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.map-rank{
+    width: auto;
+    justify-content: start;
+}
+#snow-container{
+    margin-top: 42px;
+    z-index: 2;
+}
+
+/*
+     FILE ARCHIVED ON 17:50:07 Nov 20, 2020 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 22:33:30 May 13, 2021.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  exclusion.robots: 0.327
+  RedisCDXSource: 18.08
+  PetaboxLoader3.datanode: 98.291 (4)
+  exclusion.robots.policy: 0.314
+  esindex: 0.011
+  load_resource: 98.667
+  LoadShardBlock: 80.611 (3)
+  captures_list: 117.187
+  PetaboxLoader3.resolve: 77.174
+  CDXLines.iter: 15.403 (3)
+*/
